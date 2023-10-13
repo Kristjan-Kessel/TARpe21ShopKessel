@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TARpe21ShopVaitmaa.Data;
+using TARpe21ShopVaitmaa.Models;
 
 namespace TARpe21ShopVaitmaa.Controllers
 {
@@ -25,6 +26,7 @@ namespace TARpe21ShopVaitmaa.Controllers
                     EnginePower = s.EnginePower,
 
                 });
+            return View(result);
         }
 
     }
