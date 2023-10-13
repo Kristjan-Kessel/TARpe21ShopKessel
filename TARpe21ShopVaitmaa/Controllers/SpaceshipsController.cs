@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TARpe21ShopVaitmaa.Data;
 using TARpe21ShopVaitmaa.Models;
+using TARpe21ShopVaitmaa.Models.Spaceship;
 
 namespace TARpe21ShopVaitmaa.Controllers
 {
