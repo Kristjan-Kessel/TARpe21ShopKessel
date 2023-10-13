@@ -4,10 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TARpe21ShopVaitmaa.Core.Domain.Spaceship;
 
-namespace TARpe21ShopVaitmaa.Core.Domain.Spaceship
+namespace TARpe21ShopVaitmaa.Core.Dto
 {
-    public class Spaceship
+    internal class SpaceshipDto
     {
         [Key]
         public Guid? Id { get; set; } // globally unique identifier
@@ -35,14 +36,4 @@ namespace TARpe21ShopVaitmaa.Core.Domain.Spaceship
         public DateTime CreatedAt { get; set; } // when the entry was created
         public DateTime ModifiedAt { get; set; } // when the entry has been modified last
     }
-
-    public class Dimension
-    {
-        [Key]
-        public int DimensionId { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
-        public int Depth { get; set; }
-    }
-
 }
