@@ -31,4 +31,14 @@ namespace TARpe21ShopVaitmaa.Models.Spaceship
         public DateTime CreatedAt { get; set; } // when the entry was created
         public DateTime ModifiedAt { get; set; } // when the entry has been modified last
     }
+
+    public class Dimension
+    {
+        [Key]
+        public int DimensionId { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public int Depth { get; set; }
+    }
+
 }

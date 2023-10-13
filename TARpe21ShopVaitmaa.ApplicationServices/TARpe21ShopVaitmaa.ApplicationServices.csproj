@@ -13,4 +13,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TARpe21ShopVaitmaa.Data\TARpe21ShopVaitmaa.Data.csproj" />
+  </ItemGroup>
+
 </Project>
