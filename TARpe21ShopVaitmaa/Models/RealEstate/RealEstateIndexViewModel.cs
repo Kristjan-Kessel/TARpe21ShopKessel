@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TARpe21ShopVaitmaa.Core.Domain;
 
-namespace TARpe21ShopVaitmaa.Core.Domain
+namespace TARpe21ShopVaitmaa.Models.RealEstate
 {
-
-    public enum EstateType
-    {
-        House, Apartment, Land, Room, ParkingSpace, TimeShare, Garage, StorageUnit, Mansion, Station
-    }
-
-    public class RealEstate
+    public class RealEstateIndexViewModel
     {
         public Guid Id { get; set; }
         public string Address { get; set; }
@@ -37,7 +27,7 @@ namespace TARpe21ShopVaitmaa.Core.Domain
         public bool hasWater { get; set; }
         public decimal SqMPrice
         {
-            get { return Price/SquareMeters; }
+            get { return Price / SquareMeters; }
         }
         public EstateType EstateType { get; set; }
         public bool IsPropertyNewDevelopment { get; set; }
@@ -45,7 +35,6 @@ namespace TARpe21ShopVaitmaa.Core.Domain
 
         //db only
         public DateTime CreatedAt { get; set; }
-        public DateTime ModifiedAt { get; set;}
-
+        public DateTime ModifiedAt { get; set; }
     }
 }
