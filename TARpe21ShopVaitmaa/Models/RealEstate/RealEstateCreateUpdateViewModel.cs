@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TARpe21ShopVaitmaa.Core.Domain;
+﻿using TARpe21ShopVaitmaa.Core.Domain;
 
-namespace TARpe21ShopVaitmaa.Core.Dto
+namespace TARpe21ShopVaitmaa.Models.RealEstate
 {
-
-    public class RealEstateDto
+    public class RealEstateCreateUpdateViewModel
     {
         public Guid Id { get; set; }
         public string Address { get; set; }
@@ -42,6 +36,5 @@ namespace TARpe21ShopVaitmaa.Core.Dto
         //db only
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
-
     }
 }

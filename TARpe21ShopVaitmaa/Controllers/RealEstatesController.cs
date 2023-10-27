@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TARpe21ShopVaitmaa.ApplicationServices.Services;
+using TARpe21ShopVaitmaa.Core.Dto;
 using TARpe21ShopVaitmaa.Core.ServiceInterface;
 using TARpe21ShopVaitmaa.Data;
 using TARpe21ShopVaitmaa.Models.RealEstate;
@@ -36,5 +38,49 @@ namespace TARpe21ShopVaitmaa.Controllers
                 });
             return View(result);
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            RealEstateCreateUpdateViewModel vm = new();
+            return View("CreateUpdate", vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(RealEstateCreateUpdateViewModel vm)
+        {
+            var dto = new RealEstateDto()
+            {
+                Id = vm.Id,
+                Address = vm.Address,
+                City = vm.City, 
+                County = vm.County,
+                Country = vm.Country,
+                SquareMeters = vm.SquareMeters,
+                Price = vm.Price,
+                PostalCode = vm.PostalCode,
+                PhoneNumber = vm.PhoneNumber,
+                FaxNumber = vm.FaxNumber,
+                ListingDescription = vm.ListingDescription,
+                BuildDate = vm.BuildDate,
+                FloorCount = vm.FloorCount,
+                EstateFloor = vm.EstateFloor,
+                Bathrooms = vm.Bathrooms,
+                Bedrooms = vm.Bedrooms,
+                hasElectricity = vm.hasElectricity,
+                hasParkingSpace = vm.hasParkingSpace,
+                hasWater = vm.hasWater,
+                EstateType = vm.EstateType,
+                isSold = vm.isSold,
+                IsPropertyNewDevelopment = vm.IsPropertyNewDevelopment,
+            };
+            var result = await _realEstateServices.Create(dto);
+            if (result == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index), vm);
+        }
+
     }
 }
