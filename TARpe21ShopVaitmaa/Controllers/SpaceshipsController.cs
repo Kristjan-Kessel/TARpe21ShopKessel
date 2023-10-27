@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TARpe21ShopVaitmaa.ApplicationServices.Services;
 using TARpe21ShopVaitmaa.Core.Dto;
 using TARpe21ShopVaitmaa.Core.ServiceInterface;
 using TARpe21ShopVaitmaa.Data;
@@ -12,14 +13,18 @@ namespace TARpe21ShopVaitmaa.Controllers
     {
         private readonly TARpe21ShopVaitmaaContext _context;
         private readonly ISpaceshipsServices _spaceshipsServices;
+        private readonly IFilesServices _filesServices;
         public SpaceshipsController
             (
             TARpe21ShopVaitmaaContext context,
-            ISpaceshipsServices spaceshipsServices
+            ISpaceshipsServices spaceshipsServices,
+            IFilesServices filesServices
+            
             )
         {
             _context = context;
             _spaceshipsServices = spaceshipsServices;
+            _filesServices = filesServices;
         }
         public IActionResult Index()
         {
@@ -121,7 +126,6 @@ namespace TARpe21ShopVaitmaa.Controllers
             vm.ModifiedAt = spaceship.ModifiedAt;
             vm.Image.AddRange(photos);
 
-
             return View("CreateUpdate", vm);
         }
         [HttpPost]        
@@ -147,7 +151,15 @@ namespace TARpe21ShopVaitmaa.Controllers
                 MaintenanceCount = vm.MaintenanceCount,
                 LastMaintenance = vm.LastMaintenance,
                 CreatedAt = vm.CreatedAt,
-                ModifiedAt = vm.ModifiedAt
+                ModifiedAt = vm.ModifiedAt,
+                Files = vm.Files,
+                Image = vm.Image.Select(x => new FileToDatabaseDto
+                {
+                    Id = x.ImageId,
+                    ImageData = x.ImageData,
+                    ImageTitle = x.ImageTitle,
+                    SpaceshipId = x.SpaceshipId,
+                }).ToArray()
             };
             var result = await _spaceshipsServices.Update(dto);
             if (result == null)
@@ -178,7 +190,7 @@ namespace TARpe21ShopVaitmaa.Controllers
                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
                }).ToArrayAsync();
 
-            var vm = new SpaceshipCreateUpdateViewModel();
+            var vm = new SpaceshipDetailsViewModel();
             vm.Id = spaceship.Id;
             vm.Name = spaceship.Name;
             vm.Description = spaceship.Description;
@@ -244,5 +256,23 @@ namespace TARpe21ShopVaitmaa.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveImage(ImageViewModel file)
+        {
+            var dto = new FileToDatabaseDto()
+            {
+                Id = file.ImageId,
+            };
+
+            var image = await _filesServices.RemoveImage(dto);
+            if(image == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+
+        }
+
     }
 }
