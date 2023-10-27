@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TARpe21ShopVaitmaa.Data;
 
@@ -11,9 +12,10 @@ using TARpe21ShopVaitmaa.Data;
 namespace TARpe21ShopVaitmaa.Data.Migrations
 {
     [DbContext(typeof(TARpe21ShopVaitmaaContext))]
-    partial class TARpe21ShopVaitmaaContextModelSnapshot : ModelSnapshot
+    [Migration("20231013073105_dtocore")]
+    partial class dtocore
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,29 +24,34 @@ namespace TARpe21ShopVaitmaa.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("TARpe21ShopVaitmaa.Core.Domain.FileToDatabase", b =>
+            modelBuilder.Entity("TARpe21ShopVaitmaa.Core.Domain.Spaceship.Dimension", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("DimensionID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
 
-                    b.Property<byte[]>("ImageData")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DimensionID"), 1L, 1);
 
-                    b.Property<string>("ImageTitle")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Depth")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Height")
+                        .HasColumnType("int");
 
                     b.Property<Guid?>("SpaceshipId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Width")
+                        .HasColumnType("int");
 
-                    b.ToTable("FilesToDatabase");
+                    b.HasKey("DimensionID");
+
+                    b.HasIndex("SpaceshipId");
+
+                    b.ToTable("Dimension");
                 });
 
-            modelBuilder.Entity("TARpe21ShopVaitmaa.Core.Domain.Spaceship", b =>
+            modelBuilder.Entity("TARpe21ShopVaitmaa.Core.Domain.Spaceship.Spaceship", b =>
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
@@ -110,7 +117,19 @@ namespace TARpe21ShopVaitmaa.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Spaceships");
+                    b.ToTable("spaceships");
+                });
+
+            modelBuilder.Entity("TARpe21ShopVaitmaa.Core.Domain.Spaceship.Dimension", b =>
+                {
+                    b.HasOne("TARpe21ShopVaitmaa.Core.Domain.Spaceship.Spaceship", null)
+                        .WithMany("Dimensions")
+                        .HasForeignKey("SpaceshipId");
+                });
+
+            modelBuilder.Entity("TARpe21ShopVaitmaa.Core.Domain.Spaceship.Spaceship", b =>
+                {
+                    b.Navigation("Dimensions");
                 });
 #pragma warning restore 612, 618
         }

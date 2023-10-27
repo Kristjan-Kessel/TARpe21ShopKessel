@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TARpe21ShopVaitmaa.Core.Domain.Spaceship;
+﻿using System.ComponentModel.DataAnnotations;
+using TARpe21ShopVaitmaa.Core.Domain;
+using TARpe21ShopVaitmaa.Core.Dto;
 
-namespace TARpe21ShopVaitmaa.Core.Dto
+namespace TARpe21ShopVaitmaa.Models.Spaceship
 {
-    class SpaceshipDto
+    public class SpaceshipCreateUpdateViewModel
     {
-        [Key]
         public Guid? Id { get; set; } // globally unique identifier
         public string Name { get; set; } // ship name
         public string Description { get; set; } // ship description
-        public ICollection<Dimension> Dimensions { get; set; }
+        //public ICollection<Dimension> Dimensions { get; set; } // contains an pbject of Dimension type, wwhich contains three int values representing width(x) height(y) and depth (z) values
         public int PassengerCount { get; set; } // how many passengers does the ship carry
         public int CrewCount { get; set; } // how many crew members is needed to operate the ship
         public int CargoWeight { get; set; } // how much cargo the ship is able to carry
@@ -29,11 +24,17 @@ namespace TARpe21ShopVaitmaa.Core.Dto
         public int FuelConsumptionPerDay { get; set; } // fuel consumed in a days worth of space traveled at maximum speed
         public int MaintenanceCount { get; set; } // how many maintenance sessions have been conducted on this ship
         public DateTime LastMaintenance { get; set; } // when was the last maintenance performed
+        public List<IFormFile> Files { get; set; } // Files that are to be added to this spaceship
+        public IEnumerable<ImageViewModel> Image { get; set; } = new List<ImageViewModel>(); // images themselves that are added
 
 
         // only in database
 
         public DateTime CreatedAt { get; set; } // when the entry was created
         public DateTime ModifiedAt { get; set; } // when the entry has been modified last
+
+
+
     }
+
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TARpe21ShopVaitmaa.Data.Migrations
 {
-    public partial class mig : Migration
+    public partial class spaceship : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

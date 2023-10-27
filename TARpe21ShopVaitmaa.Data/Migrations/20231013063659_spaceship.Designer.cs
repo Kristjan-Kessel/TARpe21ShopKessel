@@ -12,8 +12,8 @@ using TARpe21ShopVaitmaa.Data;
 namespace TARpe21ShopVaitmaa.Data.Migrations
 {
     [DbContext(typeof(TARpe21ShopVaitmaaContext))]
-    [Migration("20231013064214_mig")]
-    partial class mig
+    [Migration("20231013063659_spaceship")]
+    partial class spaceship
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

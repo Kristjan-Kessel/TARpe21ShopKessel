@@ -1,18 +1,16 @@
-﻿@model TARpe21ShopVaitmaa.Models.Spaceship.SpaceshipEditViewModel
+﻿@model TARpe21ShopVaitmaa.Models.Spaceship.SpaceshipCreateUpdateViewModel
 
-@{
-    ViewData["Title"] = "Edit";
+@if (Model.Id.HasValue)
+{
+    <h1>Update</h1>
 }
-
-<h1>Edit</h1>
-<h4>Spaceship</h4>
-
-<hr />
-
+else
+{
+    <h1>Add</h1>
+}
 
 <div>
     <form method="post" enctype="multipart/form-data">
-
         <input asp-for="Id" type="hidden" />
         <input asp-for="CreatedAt" type="hidden" />
         <input asp-for="ModifiedAt" type="hidden" />
@@ -20,14 +18,14 @@
         <div class="form-group row">
             <label asp-for="Name" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-10">
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control"/>
             </div>
         </div>
 
         <div class="form-group row">
             <label asp-for="Type" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-10">
-                <input asp-for="Type" class="form-control" />
+                <input asp-for="Type" class="form-control"/>
             </div>
         </div>
 
@@ -90,7 +88,7 @@
         <div class="form-group row">
             <label asp-for="IsSpaceshipPreviouslyOwned" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-10">
-                <input type="checkbox" asp-for="IsSpaceshipPreviouslyOwned" class="form-check-input" />
+                <input asp-for="IsSpaceshipPreviouslyOwned" class="form-check-input" />
             </div>
         </div>
 
@@ -128,16 +126,46 @@
                 <input asp-for="LastMaintenance" class="form-control" />
             </div>
         </div>
+        <hr/>
 
-        <div class="form-group">
-            <input type="submit" value="Edit" class="btn btn-primary" />
+        <div class="form-group row">
+            <label asp-for="Files" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-5">
+                <div class="custom-file">
+                    <input class="form-control custom-file-input" asp-for="Files" multiple type="file"/>
+                    <label class="custom-file-label">Choose File...</label>
+                </div>
+            </div>
         </div>
-
+        @foreach (var images in Model.Image)
+        {
+            <partial name="_Images" model="images" />
+        }
+        @if (Model.Id.HasValue)
+        {
+            <input asp-action="Update" asp-controller="spaceships" type="submit" class="btn btn-primary" value="Update" />
+        }
+        else
+        {
+            <input asp-action="Create" asp-controller="spaceships" type="submit" class="btn btn-primary" value="Create" />
+        }
+        <a asp-action="Index" class="btn btn-primary">Cancel</a>
     </form>
 </div>
-
-
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@section Scripts
+{
+    <script>
+        $(document).ready(function(){
+            $('.custom-file-input').on("change", function(){
+                var fileLabel = $(this).next('.custom-file-label');
+                var files = $(this)[0].files;
+                if(files.length > 1){
+                    fileLabel.html(files.length + ' files selected')
+                }
+                else if(files.length == 1) {
+                    fileLabel.html(files[0].name);
+                }
+            });
+        });
+    </script>
+}

@@ -12,8 +12,8 @@ using TARpe21ShopVaitmaa.Data;
 namespace TARpe21ShopVaitmaa.Data.Migrations
 {
     [DbContext(typeof(TARpe21ShopVaitmaaContext))]
-    [Migration("20231013072949_indx")]
-    partial class indx
+    [Migration("20231016100158_removeddimensions")]
+    partial class removeddimensions
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,33 +23,6 @@ namespace TARpe21ShopVaitmaa.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("TARpe21ShopVaitmaa.Core.Domain.Spaceship.Dimension", b =>
-                {
-                    b.Property<int>("DimensionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DimensionId"), 1L, 1);
-
-                    b.Property<int>("Depth")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Height")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("SpaceshipId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Width")
-                        .HasColumnType("int");
-
-                    b.HasKey("DimensionId");
-
-                    b.HasIndex("SpaceshipId");
-
-                    b.ToTable("Dimension");
-                });
 
             modelBuilder.Entity("TARpe21ShopVaitmaa.Core.Domain.Spaceship.Spaceship", b =>
                 {
@@ -117,19 +90,7 @@ namespace TARpe21ShopVaitmaa.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("spaceships");
-                });
-
-            modelBuilder.Entity("TARpe21ShopVaitmaa.Core.Domain.Spaceship.Dimension", b =>
-                {
-                    b.HasOne("TARpe21ShopVaitmaa.Core.Domain.Spaceship.Spaceship", null)
-                        .WithMany("Dimensions")
-                        .HasForeignKey("SpaceshipId");
-                });
-
-            modelBuilder.Entity("TARpe21ShopVaitmaa.Core.Domain.Spaceship.Spaceship", b =>
-                {
-                    b.Navigation("Dimensions");
+                    b.ToTable("Spaceships");
                 });
 #pragma warning restore 612, 618
         }

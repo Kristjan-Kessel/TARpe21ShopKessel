@@ -1,11 +1,10 @@
 ﻿@model IEnumerable<TARpe21ShopVaitmaa.Models.Spaceship.SpaceshipIndexViewModel>
 @{
-    ViewData["Title"] = "Index";
-    int rowNumber =1;
+    int rowNumber = 1;
 }
-<div class="h1">Products</div>
+<div class="h1">Product</div>
 <div>
-    <a asp-action="Add" asp-controller="Spaceships" type="submit" class="btn btn-primary">Add a spaceship</a>
+    <a asp-action="Create" asp-controller="spaceships" type="submit" class="btn btn-primary">Create</a>
 </div>
 <form method="post">
     <table class="table table-hover">
@@ -28,8 +27,9 @@
                     <td>@spaceship.PassengerCount</td>
                     <td>@spaceship.EnginePower</td>
                     <td>
-                        <a asp-action="edit" asp-controller="spaceships" asp-route-id="@spaceship.Id" class="btn btn-primary">Edit</a>
-                        <input asp-action="delete" asp-controller="spaceships" asp-route-id="@spaceship.Id" type="submit" class="btn btn-danger" value="delete"/>
+                        <a asp-action="details" asp-controller="spaceships" asp-route-id="@spaceship.Id" class="btn btn-info">Details</a>
+                        <a asp-action="Update" asp-controller="spaceships" asp-route-id="@spaceship.Id" class="btn btn-primary">Edit</a>
+                        <a asp-action="delete" asp-controller="spaceships" asp-route-id="@spaceship.Id" type="submit" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
                 rowNumber++;

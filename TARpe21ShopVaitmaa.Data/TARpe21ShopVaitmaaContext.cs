@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TARpe21ShopVaitmaa.Core.Domain.Spaceship;
+using TARpe21ShopVaitmaa.Core.Domain;
 
 namespace TARpe21ShopVaitmaa.Data
 {
@@ -12,6 +12,7 @@ namespace TARpe21ShopVaitmaa.Data
     {
         public TARpe21ShopVaitmaaContext(DbContextOptions<TARpe21ShopVaitmaaContext> options) : base(options) { }
 
-        public DbSet<Spaceship> spaceships { get; set; }
+        public DbSet<Spaceship> Spaceships { get; set; }
+        public DbSet<FileToDatabase> FilesToDatabase { get; set; }
     }
 }
