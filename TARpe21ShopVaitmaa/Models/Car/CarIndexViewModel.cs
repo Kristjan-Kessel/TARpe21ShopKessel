@@ -3,7 +3,7 @@ using TARpe21ShopVaitmaa.Core.Domain;
 
 namespace TARpe21ShopVaitmaa.Models.Car
 {
-    public class CarCreateUpdateViewModel
+    public class CarIndexViewModel
     {
         public Guid Id { get; set; }
         public string Brand { get; set; }

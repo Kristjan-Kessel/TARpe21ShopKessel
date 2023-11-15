@@ -9,21 +9,22 @@ namespace TARpe21ShopVaitmaa.ApplicationServices.Services
     public class CarServices : ICarServices
     {
         private readonly TARpe21ShopVaitmaaContext _context;
-        private readonly IFilesServices _filesServices;
+        //private readonly IFilesServices _filesServices;
         public CarServices
             (
-            TARpe21ShopVaitmaaContext context,
-            IFilesServices filesServices
+            TARpe21ShopVaitmaaContext context
+            //IFilesServices filesServices
             )
         {
             _context = context;
-            _filesServices = filesServices;
+            //_filesServices = filesServices;
         }
         public async Task<Car> Create(CarDto dto)
         {
             Car car = new();
 
             car.Id= dto.Id;
+            car.Model = dto.Model;
             car.Brand= dto.Brand;
             car.Year= dto.Year;
             car.IsUsed= dto.IsUsed;
@@ -43,16 +44,6 @@ namespace TARpe21ShopVaitmaa.ApplicationServices.Services
             var carId = await _context.Cars
                 //.Include(x => x.FilesToApi)
                 .FirstOrDefaultAsync(x => x.Id == id);
-
-            var images = await _context.FilesToApi
-                .Where(x => x.RealEstateId == id)
-                .Select(y => new FileToApiDto
-                {
-                    Id = y.Id,
-                    RealEstateId = y.RealEstateId,
-                    ExistingFilePath = y.ExistingFilePath
-                }).ToArrayAsync();
-            await _filesServices.RemoveImagesFromApi(images);
 
             _context.Cars.Remove(carId);
             await _context.SaveChangesAsync();
