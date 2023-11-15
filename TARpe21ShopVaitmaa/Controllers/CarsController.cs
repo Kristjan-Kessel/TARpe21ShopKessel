@@ -104,5 +104,62 @@ namespace TARpe21ShopVaitmaa.Controllers
             return RedirectToAction(nameof(Index), vm);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var car = await _cars.GetAsync(id);
+            if (car == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new CarDetailsDeleteViewModel();
+
+            vm.Id = car.Id;
+            vm.Brand = car.Brand;
+            vm.Model = car.Model;
+            vm.Year = car.Year;
+            vm.IsUsed = car.IsUsed;
+            vm.CreatedAt = car.CreatedAt;
+            vm.ModifiedAt = car.ModifiedAt;
+            vm.isDeleting = false;
+
+            return View("DetailsDelete", vm);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var car = await _cars.GetAsync(id);
+            if (car == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new CarDetailsDeleteViewModel();
+
+            vm.Id = car.Id;
+            vm.Brand = car.Brand;
+            vm.Model = car.Model;
+            vm.Year = car.Year;
+            vm.IsUsed = car.IsUsed;
+            vm.CreatedAt = car.CreatedAt;
+            vm.ModifiedAt = car.ModifiedAt;
+            vm.isDeleting = true;
+
+            return View("DetailsDelete", vm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmation(Guid id)
+        {
+            var car = await _cars.Delete(id);
+            if (car == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+
+        }
+
     }
 }
