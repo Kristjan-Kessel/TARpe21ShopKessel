@@ -30,6 +30,7 @@
         public String? Type { get; set; }
         public bool IsPropertyNewDevelopment { get; set; }
         public bool isSold { get; set; }
+        public List<FileToApiViewModel> FileToApiViewModels { get; set; } = new List<FileToApiViewModel>();
 
         //db only
         public DateTime CreatedAt { get; set; }

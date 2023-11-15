@@ -14,11 +14,28 @@ namespace TARpe21ShopVaitmaa.Controllers
     {
         private readonly IRealEstateServices _realEstates;
         private readonly TARpe21ShopVaitmaaContext _context;
+        private readonly IFilesServices _filesServices;
 
-        public RealEstatesController(IRealEstateServices realEstateServices, TARpe21ShopVaitmaaContext context)
+        public RealEstatesController(IRealEstateServices realEstateServices, TARpe21ShopVaitmaaContext context, IFilesServices filesServices)
         {
             _realEstates = realEstateServices;
             _context = context;
+            _filesServices = filesServices;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveImage(FileToApiViewModel vm)
+        {
+            var dto = new FileToApiDto()
+            {
+                Id = vm.ImageId
+            };
+            var image = await _filesServices.RemoveImageFromApi(dto);
+            if (image == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
@@ -101,6 +118,15 @@ namespace TARpe21ShopVaitmaa.Controllers
             {
                 return NotFound();
             }
+
+            var images = await _context.FilesToApi
+                .Where(x => x.RealEstateId == id)
+                .Select(y => new FileToApiViewModel
+                {
+                    FilePath = y.ExistingFilePath,
+                    ImageId = y.Id
+                }).ToArrayAsync();
+
             var vm = new RealEstateCreateUpdateViewModel();
 
             vm.Id = realEstate.Id;
@@ -128,6 +154,7 @@ namespace TARpe21ShopVaitmaa.Controllers
             vm.isSold = realEstate.isSold;
             vm.CreatedAt = DateTime.Now;
             vm.ModifiedAt = DateTime.Now;
+            vm.FileToApiViewModels.AddRange(images);
 
             return View("CreateUpdate", vm);
         }
@@ -186,6 +213,14 @@ namespace TARpe21ShopVaitmaa.Controllers
                 return NotFound();
             }
 
+            var images = await _context.FilesToApi
+                .Where(x => x.RealEstateId == id)
+                .Select(y => new FileToApiViewModel
+                {
+                    FilePath = y.ExistingFilePath,
+                    ImageId = y.Id
+                }).ToArrayAsync();
+
             var vm = new RealEstateDetailsViewModel();
 
             vm.Id = realEstate.Id;
@@ -211,6 +246,9 @@ namespace TARpe21ShopVaitmaa.Controllers
             vm.Type = realEstate.Type;
             vm.IsPropertyNewDevelopment = realEstate.IsPropertyNewDevelopment;
             vm.isSold = realEstate.isSold;
+            vm.CreatedAt = realEstate.CreatedAt;
+            vm.ModifiedAt = realEstate.ModifiedAt;
+            vm.FileToApiViewModels.AddRange(images);
 
             return View(vm);
         }
@@ -222,6 +260,13 @@ namespace TARpe21ShopVaitmaa.Controllers
             {
                 return NotFound();
             }
+            var images = await _context.FilesToApi
+                .Where(x => x.RealEstateId == id)
+                .Select(y => new FileToApiViewModel
+                {
+                    FilePath = y.ExistingFilePath,
+                    ImageId = y.Id
+                }).ToArrayAsync();
 
             var vm = new RealEstateDeleteViewModel();
 
@@ -248,6 +293,7 @@ namespace TARpe21ShopVaitmaa.Controllers
             vm.Type = realEstate.Type;
             vm.IsPropertyNewDevelopment = realEstate.IsPropertyNewDevelopment;
             vm.isSold = realEstate.isSold;
+            vm.FileToApiViewModels.AddRange(images);
 
             return View(vm);
         }

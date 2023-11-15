@@ -63,43 +63,54 @@ namespace TARpe21ShopVaitmaa.ApplicationServices.Services
         public async Task<RealEstate> Delete(Guid id)
         {
             var realEstateId = await _context.RealEstates
+                .Include(x => x.FilesToApi)
                 .FirstOrDefaultAsync(x => x.Id == id);
+            var images = await _context.FilesToApi
+                .Where(x => x.RealEstateId == id)
+                .Select(y => new FileToApiDto
+                {
+                    Id = y.Id,
+                    RealEstateId = y.RealEstateId,
+                    ExistingFilePath = y.ExistingFilePath
+                }).ToArrayAsync();
+            await _filesServices.RemoveImagesFromApi(images);
             _context.RealEstates.Remove(realEstateId);
             await _context.SaveChangesAsync();
             return realEstateId;
         }
         public async Task<RealEstate> Update(RealEstateDto dto)
         {
-            var domain = new RealEstate()
-            {
-                Id = Guid.NewGuid(),
-                Address = dto.Address,
-                City = dto.City,
-                Country = dto.Country,
-                County = dto.County,
-                PostalCode = dto.PostalCode,
-                PhoneNumber = dto.PhoneNumber,
-                FaxNumber = dto.FaxNumber,
-                ListingDescription = dto.ListingDescription,
-                SquareMeters = dto.SquareMeters,
-                BuildDate = dto.BuildDate,
-                Price = dto.Price,
-                RoomCount = dto.RoomCount,
-                EstateFloor = dto.EstateFloor,
-                Bathrooms = dto.Bathrooms,
-                Bedrooms = dto.Bedrooms,
-                hasParkingSpace = dto.hasParkingSpace,
-                hasElectricity = dto.hasElectricity,
-                hasWater = dto.hasWater,
-                Type = dto.Type,
-                IsPropertyNewDevelopment = dto.IsPropertyNewDevelopment,
-                isSold = dto.isSold,
-                CreatedAt = dto.CreatedAt,
-                ModifiedAt = DateTime.Now,
-            };
-            _context.RealEstates.Update(domain);
+            RealEstate realEstate = new RealEstate();
+
+            realEstate.Id = dto.Id;
+            realEstate.Address = dto.Address;
+            realEstate.City = dto.City;
+            realEstate.Country = dto.Country;
+            realEstate.County = dto.County;
+            realEstate.PostalCode = dto.PostalCode;
+            realEstate.PhoneNumber = dto.PhoneNumber;
+            realEstate.FaxNumber = dto.FaxNumber;
+            realEstate.ListingDescription = dto.ListingDescription;
+            realEstate.SquareMeters = dto.SquareMeters;
+            realEstate.BuildDate = dto.BuildDate;
+            realEstate.Price = dto.Price;
+            realEstate.RoomCount = dto.RoomCount;
+            realEstate.EstateFloor = dto.EstateFloor;
+            realEstate.Bathrooms = dto.Bathrooms;
+            realEstate.Bedrooms = dto.Bedrooms;
+            realEstate.hasParkingSpace = dto.hasParkingSpace;
+            realEstate.hasElectricity = dto.hasElectricity;
+            realEstate.hasWater = dto.hasWater;
+            realEstate.Type = dto.Type;
+            realEstate.IsPropertyNewDevelopment = dto.IsPropertyNewDevelopment;
+            realEstate.isSold = dto.isSold;
+            realEstate.CreatedAt = dto.CreatedAt;
+            realEstate.ModifiedAt = DateTime.Now;
+            _filesServices.FilesToApi(dto, realEstate);
+
+            _context.RealEstates.Update(realEstate);
             await _context.SaveChangesAsync();
-            return domain;
+            return realEstate;
         }
         public async Task<RealEstate> GetAsync(Guid id)
         {

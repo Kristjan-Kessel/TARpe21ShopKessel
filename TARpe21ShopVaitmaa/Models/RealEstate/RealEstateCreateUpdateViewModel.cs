@@ -33,7 +33,7 @@ namespace TARpe21ShopVaitmaa.Models.RealEstate
         public bool IsPropertyNewDevelopment { get; set; }
         public bool isSold { get; set; }
         public List<IFormFile> Files { get; set; } //files
-        public List<FileToApiViewModel> FileToApiViewModels { get; set; } //file viewmodels
+        public List<FileToApiViewModel> FileToApiViewModels { get; set; } = new List<FileToApiViewModel>();
 
         //db only
         public DateTime CreatedAt { get; set; }
