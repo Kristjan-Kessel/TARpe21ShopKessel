@@ -14,7 +14,7 @@ namespace TARpe21ShopVaitmaa.Data
 
         public DbSet<Spaceship> Spaceships { get; set; }
         public DbSet<FileToDatabase> FilesToDatabase { get; set; }
-
         public DbSet<RealEstate> RealEstates { get; set; }
+        public DbSet<FileToApi> FilesToApi { get; set; }
     }
 }

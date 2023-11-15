@@ -9,6 +9,7 @@ namespace TARpe21ShopVaitmaa.ApplicationServices.Services
 
         Task<FileToDatabase> RemoveImage(FileToDatabaseDto dto);
         Task<List<FileToDatabase>> RemoveImagesFromDatabase(FileToDatabaseDto[] dtos);
+        void FilesToApi(RealEstateDto dto, RealEstate realEstate);
 
     }
 }

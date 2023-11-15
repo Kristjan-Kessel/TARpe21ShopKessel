@@ -1,17 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TARpe21ShopVaitmaa.Core.Domain;
-
-namespace TARpe21ShopVaitmaa.Core.Dto
+﻿namespace TARpe21ShopVaitmaa.Models.RealEstate
 {
-
-    public class RealEstateDto
+    public class RealEstateDetailsViewModel
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public string Address { get; set; }
         public string? City { get; set; }
         public string County { get; set; }
@@ -39,12 +30,9 @@ namespace TARpe21ShopVaitmaa.Core.Dto
         public String? Type { get; set; }
         public bool IsPropertyNewDevelopment { get; set; }
         public bool isSold { get; set; }
-        public List<IFormFile> Files { get; set; }
-        public IEnumerable<FileToApiDto> FilesToApiDtos { get; set; } = new List<FileToApiDto>();
 
         //db only
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
-
     }
 }

@@ -34,9 +34,12 @@ namespace TARpe21ShopVaitmaa.Core.Domain
         {
             get { return Price/SquareMeters; }
         }
-        public String Type { get; set; }
+        public String? Type { get; set; }
         public bool IsPropertyNewDevelopment { get; set; }
         public bool isSold { get; set; }
+
+        public IEnumerable<FileToApi> FilesToApi { get; set; } = new List<FileToApi>(); //files to be added to the api
+
 
         //db only
         public DateTime CreatedAt { get; set; }

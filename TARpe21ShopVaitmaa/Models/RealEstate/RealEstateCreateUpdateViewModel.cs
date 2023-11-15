@@ -29,9 +29,11 @@ namespace TARpe21ShopVaitmaa.Models.RealEstate
         {
             get { return Price / SquareMeters; }
         }
-        public String Type { get; set; }
+        public String? Type { get; set; }
         public bool IsPropertyNewDevelopment { get; set; }
         public bool isSold { get; set; }
+        public List<IFormFile> Files { get; set; } //files
+        public List<FileToApiViewModel> FileToApiViewModels { get; set; } //file viewmodels
 
         //db only
         public DateTime CreatedAt { get; set; }
