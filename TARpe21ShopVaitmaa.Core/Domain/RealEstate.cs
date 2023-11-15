@@ -7,11 +7,6 @@ using System.Threading.Tasks;
 namespace TARpe21ShopVaitmaa.Core.Domain
 {
 
-    public enum EstateType
-    {
-        House, Apartment, Land, Room, ParkingSpace, TimeShare, Garage, StorageUnit, Mansion, Station
-    }
-
     public class RealEstate
     {
         public Guid Id { get; set; }
@@ -39,7 +34,7 @@ namespace TARpe21ShopVaitmaa.Core.Domain
         {
             get { return Price/SquareMeters; }
         }
-        public EstateType EstateType { get; set; }
+        public String Type { get; set; }
         public bool IsPropertyNewDevelopment { get; set; }
         public bool isSold { get; set; }
 

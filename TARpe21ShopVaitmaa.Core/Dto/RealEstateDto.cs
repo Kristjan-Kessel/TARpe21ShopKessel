@@ -35,7 +35,7 @@ namespace TARpe21ShopVaitmaa.Core.Dto
         {
             get { return Price / SquareMeters; }
         }
-        public EstateType EstateType { get; set; }
+        public String Type { get; set; }
         public bool IsPropertyNewDevelopment { get; set; }
         public bool isSold { get; set; }
 

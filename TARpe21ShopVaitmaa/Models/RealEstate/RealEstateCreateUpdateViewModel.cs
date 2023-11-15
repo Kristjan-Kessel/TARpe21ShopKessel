@@ -4,7 +4,7 @@ namespace TARpe21ShopVaitmaa.Models.RealEstate
 {
     public class RealEstateCreateUpdateViewModel
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public string Address { get; set; }
         public string? City { get; set; }
         public string County { get; set; }
@@ -29,7 +29,7 @@ namespace TARpe21ShopVaitmaa.Models.RealEstate
         {
             get { return Price / SquareMeters; }
         }
-        public EstateType EstateType { get; set; }
+        public String Type { get; set; }
         public bool IsPropertyNewDevelopment { get; set; }
         public bool isSold { get; set; }
 

@@ -51,7 +51,7 @@ namespace TARpe21ShopVaitmaa.ApplicationServices.Services
             realEstate.hasElectricity = dto.hasElectricity;
             realEstate.isSold = dto.isSold;
             realEstate.hasWater = dto.hasWater;
-            realEstate.EstateType = dto.EstateType;
+            realEstate.Type = dto.Type;
             realEstate.IsPropertyNewDevelopment = dto.IsPropertyNewDevelopment;
             realEstate.CreatedAt = DateTime.Now;
             realEstate.ModifiedAt = DateTime.Now;
