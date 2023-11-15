@@ -27,11 +27,11 @@ namespace TARpe21ShopVaitmaa.ApplicationServices.Services
             car.Brand= dto.Brand;
             car.Year= dto.Year;
             car.IsUsed= dto.IsUsed;
-            car.FilesToApi= dto.FilesToApi;
+            //car.FilesToApi= dto.FilesToApi;
             car.CreatedAt= DateTime.Now;
             car.ModifiedAt= DateTime.Now;
 
-            _filesServices.FilesToApi(dto, car);
+            //_filesServices.FilesToApi(dto, car);
 
 
             await _context.Cars.AddAsync(car);
@@ -41,7 +41,7 @@ namespace TARpe21ShopVaitmaa.ApplicationServices.Services
         public async Task<Car> Delete(Guid id)
         {
             var carId = await _context.Cars
-                .Include(x => x.FilesToApi)
+                //.Include(x => x.FilesToApi)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             var images = await _context.FilesToApi
@@ -66,10 +66,10 @@ namespace TARpe21ShopVaitmaa.ApplicationServices.Services
             car.Brand = dto.Brand;
             car.Year = dto.Year;
             car.IsUsed = dto.IsUsed;
-            car.FilesToApi = dto.FilesToApi;
+            //car.FilesToApi = dto.FilesToApi;
             car.CreatedAt = DateTime.Now;
             car.ModifiedAt = DateTime.Now;
-            _filesServices.FilesToApi(dto, car);
+            //_filesServices.FilesToApi(dto, car);
 
             _context.Cars.Update(car);
             await _context.SaveChangesAsync();

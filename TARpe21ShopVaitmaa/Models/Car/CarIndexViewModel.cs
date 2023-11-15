@@ -3,7 +3,7 @@ using TARpe21ShopVaitmaa.Core.Domain;
 
 namespace TARpe21ShopVaitmaa.Models.Car
 {
-    public class CarIndexViewModel
+    public class CarCreateUpdateViewModel
     {
         public Guid Id { get; set; }
         public string Brand { get; set; }
@@ -11,7 +11,7 @@ namespace TARpe21ShopVaitmaa.Models.Car
         public int Year { get; set; }
         public bool IsUsed { get; set; }
 
-        public IEnumerable<FileToApi> FilesToApi { get; set; } = new List<FileToApi>(); //files to be added to the api
+        //public IEnumerable<FileToApi> FilesToApi { get; set; } = new List<FileToApi>(); //files to be added to the api
 
         //db only
         public DateTime CreatedAt { get; set; }

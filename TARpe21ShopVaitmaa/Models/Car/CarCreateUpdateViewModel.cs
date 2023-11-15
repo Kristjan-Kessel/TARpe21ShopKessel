@@ -1,14 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
 using TARpe21ShopVaitmaa.Core.Domain;
 
-namespace TARpe21ShopVaitmaa.Core.Dto
+namespace TARpe21ShopVaitmaa.Models.Car
 {
-    public class CarDto
+    public class CarIndexViewModel
     {
         public Guid Id { get; set; }
         public string Brand { get; set; }
@@ -16,7 +11,6 @@ namespace TARpe21ShopVaitmaa.Core.Dto
         public int Year { get; set; }
         public bool IsUsed { get; set; }
 
-        //public List<IFormFile> Files { get; set; }
         //public IEnumerable<FileToApi> FilesToApi { get; set; } = new List<FileToApi>(); //files to be added to the api
 
         //db only

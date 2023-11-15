@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TARpe21ShopVaitmaa.ApplicationServices.Services;
+using TARpe21ShopVaitmaa.Core.Domain;
 using TARpe21ShopVaitmaa.Core.Dto;
 using TARpe21ShopVaitmaa.Core.ServiceInterface;
 using TARpe21ShopVaitmaa.Data;
 using TARpe21ShopVaitmaa.Models.Car;
+using TARpe21ShopVaitmaa.Models.RealEstate;
 
 namespace TARpe21ShopVaitmaa.Controllers
 {
@@ -31,5 +33,6 @@ namespace TARpe21ShopVaitmaa.Controllers
                 });
             return View(result);
         }
+
     }
 }
