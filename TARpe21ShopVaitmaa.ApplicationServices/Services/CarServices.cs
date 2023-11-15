@@ -31,7 +31,7 @@ namespace TARpe21ShopVaitmaa.ApplicationServices.Services
             car.CreatedAt= DateTime.Now;
             car.ModifiedAt= DateTime.Now;
 
-            //_filesServices.FilesToApi(dto, car);
+            _filesServices.FilesToApi(dto, car);
 
 
             await _context.Cars.AddAsync(car);
@@ -44,7 +44,15 @@ namespace TARpe21ShopVaitmaa.ApplicationServices.Services
                 .Include(x => x.FilesToApi)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
-            //to do: remove associated files/images
+            var images = await _context.FilesToApi
+                .Where(x => x.RealEstateId == id)
+                .Select(y => new FileToApiDto
+                {
+                    Id = y.Id,
+                    RealEstateId = y.RealEstateId,
+                    ExistingFilePath = y.ExistingFilePath
+                }).ToArrayAsync();
+            await _filesServices.RemoveImagesFromApi(images);
 
             _context.Cars.Remove(carId);
             await _context.SaveChangesAsync();
@@ -61,7 +69,7 @@ namespace TARpe21ShopVaitmaa.ApplicationServices.Services
             car.FilesToApi = dto.FilesToApi;
             car.CreatedAt = DateTime.Now;
             car.ModifiedAt = DateTime.Now;
-            //_filesServices.FilesToApi(dto, realEstate);
+            _filesServices.FilesToApi(dto, car);
 
             _context.Cars.Update(car);
             await _context.SaveChangesAsync();
