@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TARpe21ShopVaitmaa.ApplicationServices.Services;
 using TARpe21ShopVaitmaa.Core.Domain;
 using TARpe21ShopVaitmaa.Core.Dto;
@@ -58,6 +59,44 @@ namespace TARpe21ShopVaitmaa.Controllers
 
             };
             var result = await _cars.Create(dto);
+            if (result == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index), vm);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Update(Guid id)
+        {
+            var car = await _cars.GetAsync(id);
+            if (car == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new CarCreateUpdateViewModel();
+
+            vm.Id = car.Id;
+            vm.Brand = car.Brand;
+            vm.Model = car.Model;
+            vm.Year = car.Year;
+            vm.IsUsed = car.IsUsed;
+
+            return View("CreateUpdate", vm);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(CarCreateUpdateViewModel vm)
+        {
+            var dto = new CarDto()
+            {
+                Id = (Guid)vm.Id,
+                Brand = vm.Brand,
+                Model = vm.Model,
+                Year = vm.Year,
+                IsUsed = vm.IsUsed
+            };
+            var result = await _cars.Update(dto);
             if (result == null)
             {
                 return RedirectToAction(nameof(Index));
