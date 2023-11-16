@@ -1,4 +1,5 @@
 ﻿using TARpe21ShopVaitmaa.Core.Domain;
+using TARpe21ShopVaitmaa.Models.File;
 
 namespace TARpe21ShopVaitmaa.Models.RealEstate
 {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TARpe21ShopVaitmaa.Core.Domain;
+using TARpe21ShopVaitmaa.Models.File;
 
 namespace TARpe21ShopVaitmaa.Models.Car
 {
@@ -10,8 +11,8 @@ namespace TARpe21ShopVaitmaa.Models.Car
         public string Model { get; set; }
         public int Year { get; set; }
         public bool IsUsed { get; set; }
-
-        //public IEnumerable<FileToApi> FilesToApi { get; set; } = new List<FileToApi>(); //files to be added to the api
+        public List<IFormFile> Files { get; set; }
+        public List<FileToApiViewModel> FileToApiViewModels { get; set; } = new List<FileToApiViewModel>();
 
         //db only
         public DateTime CreatedAt { get; set; }

@@ -5,6 +5,7 @@ using TARpe21ShopVaitmaa.Core.Domain;
 using TARpe21ShopVaitmaa.Core.Dto;
 using TARpe21ShopVaitmaa.Core.ServiceInterface;
 using TARpe21ShopVaitmaa.Data;
+using TARpe21ShopVaitmaa.Models.File;
 using TARpe21ShopVaitmaa.Models.RealEstate;
 using TARpe21ShopVaitmaa.Models.Spaceship;
 

@@ -1,4 +1,6 @@
-﻿namespace TARpe21ShopVaitmaa.Models.RealEstate
+﻿using TARpe21ShopVaitmaa.Models.File;
+
+namespace TARpe21ShopVaitmaa.Models.RealEstate
 {
     public class RealEstateDetailsViewModel
     {

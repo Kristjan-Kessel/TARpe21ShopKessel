@@ -15,9 +15,8 @@ namespace TARpe21ShopVaitmaa.Core.Dto
         public string Model { get; set; }
         public int Year { get; set; }
         public bool IsUsed { get; set; }
-
-        //public List<IFormFile> Files { get; set; }
-        //public IEnumerable<FileToApi> FilesToApi { get; set; } = new List<FileToApi>(); //files to be added to the api
+        public List<IFormFile> Files { get; set; }
+        public IEnumerable<FileToApiDto> FilesToApiDtos { get; set; } = new List<FileToApiDto>(); //files to be added to the api
 
         //db only
         public DateTime CreatedAt { get; set; }

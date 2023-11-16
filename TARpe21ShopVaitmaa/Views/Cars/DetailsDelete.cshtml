@@ -51,6 +51,11 @@ else
             @Html.DisplayFor(model => model.CreatedAt)
         </div>
 
+        @foreach (var images in Model.FileToApiViewModels)
+        {
+                <partial name="_Images" model="images" />
+        }
+
     </dl>
 
     @if (Model.isDeleting)
