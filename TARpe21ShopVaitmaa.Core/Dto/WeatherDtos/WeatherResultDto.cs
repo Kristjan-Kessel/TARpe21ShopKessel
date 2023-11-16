@@ -23,9 +23,9 @@ namespace TARpe21ShopVaitmaa.Core.Dto.WeatherDtos
         public double TempMinValue { get; set; }
         public string TempMinUnit { get; set; }
         public int TempMinUnitType { get; set; }
-        public double TempManValue { get; set; }
-        public string TempManUnit { get; set; }
-        public int TempManUnitType { get; set; }
+        public double TempMaxValue { get; set; }
+        public string TempMaxUnit { get; set; }
+        public int TempMaxUnitType { get; set; }
 
         public int DayIcon { get; set; }
         public bool DayHasPrecipitation { get; set; }
@@ -38,6 +38,5 @@ namespace TARpe21ShopVaitmaa.Core.Dto.WeatherDtos
         public string NightIconPhrase { get; set; }
         public string NightPrecipitationType { get; set; }
         public string NightPrecipitationIntensity { get; set; }
-
     }
 }
