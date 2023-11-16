@@ -7,15 +7,16 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using TARpe21ShopVaitmaa.Core.Dto.WeatherDtos;
+using TARpe21ShopVaitmaa.Core.ServiceInterface;
 
 namespace TARpe21ShopVaitmaa.ApplicationServices.Services
 {
-    public class WeatherForecastsServices
+    public class WeatherForecastsServices : IWeatherForecastsServices
     {
         public async Task<WeatherResultDto> WeatherDetail(WeatherResultDto dto)
         {
             string apikey = "AK1iRveuuVAmTyfxhN1dfJKuwIJ1Hrnx";
-            string url = $"http://dataservice.accuweather.com/forecasts/v1/daily/1day";
+            string url = $"http://dataservice.accuweather.com/forecasts/v1/daily/1day/";
 
             using (WebClient client = new WebClient())
             {
