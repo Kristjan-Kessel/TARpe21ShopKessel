@@ -1,6 +1,6 @@
 ﻿namespace TARpe21ShopVaitmaa.Models.RealEstate
 {
-    public class RealEstateDeleteViewModel
+    public class RealEstateDeleteDetailsViewModel
     {
         public Guid? Id { get; set; }
         public string Address { get; set; }
@@ -31,6 +31,8 @@
         public bool IsPropertyNewDevelopment { get; set; }
         public bool isSold { get; set; }
         public List<FileToApiViewModel> FileToApiViewModels { get; set; } = new List<FileToApiViewModel>();
+
+        public bool isDeleting { get; set; }
 
         //db only
         public DateTime CreatedAt { get; set; }

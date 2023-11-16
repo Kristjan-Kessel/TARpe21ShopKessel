@@ -221,7 +221,7 @@ namespace TARpe21ShopVaitmaa.Controllers
                     ImageId = y.Id
                 }).ToArrayAsync();
 
-            var vm = new RealEstateDetailsViewModel();
+            var vm = new RealEstateDeleteDetailsViewModel();
 
             vm.Id = realEstate.Id;
             vm.Address = realEstate.Address;
@@ -249,8 +249,9 @@ namespace TARpe21ShopVaitmaa.Controllers
             vm.CreatedAt = realEstate.CreatedAt;
             vm.ModifiedAt = realEstate.ModifiedAt;
             vm.FileToApiViewModels.AddRange(images);
+            vm.isDeleting = false;
 
-            return View(vm);
+            return View("DetailsDelete", vm);
         }
         [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
@@ -268,7 +269,7 @@ namespace TARpe21ShopVaitmaa.Controllers
                     ImageId = y.Id
                 }).ToArrayAsync();
 
-            var vm = new RealEstateDeleteViewModel();
+            var vm = new RealEstateDeleteDetailsViewModel();
 
             vm.Id = realEstate.Id;
             vm.Address = realEstate.Address;
@@ -294,8 +295,9 @@ namespace TARpe21ShopVaitmaa.Controllers
             vm.IsPropertyNewDevelopment = realEstate.IsPropertyNewDevelopment;
             vm.isSold = realEstate.isSold;
             vm.FileToApiViewModels.AddRange(images);
+            vm.isDeleting = true;
 
-            return View(vm);
+            return View("DetailsDelete", vm);
         }
         [HttpPost]
         public async Task<IActionResult> DeleteConfirmation(Guid id)

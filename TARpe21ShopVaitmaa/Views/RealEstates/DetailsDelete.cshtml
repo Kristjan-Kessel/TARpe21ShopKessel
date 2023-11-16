@@ -1,6 +1,18 @@
-﻿@model TARpe21ShopVaitmaa.Models.RealEstate.RealEstateDeleteViewModel
-<h1>Delete</h1>
+﻿@model TARpe21ShopVaitmaa.Models.RealEstate.RealEstateDeleteDetailsViewModel
+
+
+@if (Model.isDeleting)
+{
+    <h1>Delete</h1>
+}else
+{
+    <h1>Details</h1>
+}
+
+
+
 <div>
+
     <h4>Real Estate</h4>
     <hr />
     <dl class="row">
@@ -138,12 +150,18 @@
         {
                 <partial name="_Images" model="images" />
         }
-
     </dl>
+    @if (Model.isDeleting)
+    {
+        <form asp-action="DeleteConfirmation">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            <a asp-action="index" asp-controller="realEstates" class="btn btn-primary">Back</a>
+        </form>
+    }
+    else
+    {
+        <a asp-action="Index" asp-controller="realEstates" class="btn btn-primary">Back</a>
+    }
+    
 </div>
-<hr />
-<form asp-action="DeleteConfirmation">
-    <input type="hidden" asp-for="Id" />
-    <input type="submit" value="Delete" class="btn btn-danger" />
-    <a asp-action="index" asp-controller="realEstates" class="btn btn-primary">Back</a>
-</form>
