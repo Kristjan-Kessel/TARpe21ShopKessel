@@ -204,7 +204,7 @@ namespace TARpe21ShopVaitmaa.Controllers
             vm.IsUsed = car.IsUsed;
             vm.CreatedAt = car.CreatedAt;
             vm.ModifiedAt = car.ModifiedAt;
-            vm.isDeleting = false;
+            vm.isDeleting = true;
             vm.FileToApiViewModels.AddRange(images);
 
             return View("DetailsDelete", vm);
