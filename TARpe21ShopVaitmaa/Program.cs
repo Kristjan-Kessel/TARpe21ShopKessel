@@ -12,6 +12,7 @@ builder.Services.AddScoped<ISpaceshipsServices, SpaceshipsServices>();
 builder.Services.AddScoped<IFilesServices, FilesServices>();
 builder.Services.AddScoped<IRealEstateServices, RealEstatesServices>();
 builder.Services.AddScoped<ICarServices, CarServices>();
+builder.Services.AddScoped<IWeatherForecastsServices, WeatherForecastsServices>();
 
 var app = builder.Build();
 
