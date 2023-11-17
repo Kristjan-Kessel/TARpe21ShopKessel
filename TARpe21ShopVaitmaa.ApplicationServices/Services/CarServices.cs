@@ -67,7 +67,7 @@ namespace TARpe21ShopVaitmaa.ApplicationServices.Services
             car.Year = dto.Year;
             car.Model= dto.Model;
             car.IsUsed = dto.IsUsed;
-            car.CreatedAt = DateTime.Now;
+            car.CreatedAt = dto.CreatedAt;
             car.ModifiedAt = DateTime.Now;
             _filesServices.FilesToApi(dto, car);
 
