@@ -8,11 +8,12 @@ using TARpe21ShopVaitmaa.Core.Dto;
 
 namespace TARpe21ShopVaitmaa.Core.ServiceInterface
 {
-    public interface IRealEstateServices
+    public interface ICarServices
     {
-        Task<RealEstate> GetAsync(Guid id);
-        Task<RealEstate> Create(RealEstateDto dto);
-        Task<RealEstate> Update(RealEstateDto dto);
-        Task<RealEstate> Delete(Guid id);
+        Task<Car> GetAsync(Guid id);
+        Task<Car> Create(CarDto dto);
+        Task<Car> Update(CarDto dto);
+        Task<Car> Delete(Guid id);
+
     }
 }

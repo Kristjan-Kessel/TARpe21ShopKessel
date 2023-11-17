@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TARpe21ShopVaitmaa.Data;
 
@@ -11,9 +12,10 @@ using TARpe21ShopVaitmaa.Data;
 namespace TARpe21ShopVaitmaa.Data.Migrations
 {
     [DbContext(typeof(TARpe21ShopVaitmaaContext))]
-    partial class TARpe21ShopVaitmaaContextModelSnapshot : ModelSnapshot
+    [Migration("20231115180509_chang")]
+    partial class chang
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,9 +61,6 @@ namespace TARpe21ShopVaitmaa.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CarId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("ExistingFilePath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -70,8 +69,6 @@ namespace TARpe21ShopVaitmaa.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CarId");
 
                     b.HasIndex("RealEstateId");
 
@@ -260,18 +257,9 @@ namespace TARpe21ShopVaitmaa.Data.Migrations
 
             modelBuilder.Entity("TARpe21ShopVaitmaa.Core.Domain.FileToApi", b =>
                 {
-                    b.HasOne("TARpe21ShopVaitmaa.Core.Domain.Car", null)
-                        .WithMany("FilesToApi")
-                        .HasForeignKey("CarId");
-
                     b.HasOne("TARpe21ShopVaitmaa.Core.Domain.RealEstate", null)
                         .WithMany("FilesToApi")
                         .HasForeignKey("RealEstateId");
-                });
-
-            modelBuilder.Entity("TARpe21ShopVaitmaa.Core.Domain.Car", b =>
-                {
-                    b.Navigation("FilesToApi");
                 });
 
             modelBuilder.Entity("TARpe21ShopVaitmaa.Core.Domain.RealEstate", b =>
