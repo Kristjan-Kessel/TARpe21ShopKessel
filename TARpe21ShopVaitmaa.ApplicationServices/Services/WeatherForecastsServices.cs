@@ -15,13 +15,14 @@ namespace TARpe21ShopVaitmaa.ApplicationServices.Services
     {
         public async Task<WeatherResultDto> WeatherDetail(WeatherResultDto dto)
         {
-            string apikey = "AK1iRveuuVAmTyfxhN1dfJKuwIJ1Hrnx";
-            string url = $"http://dataservice.accuweather.com/forecasts/v1/daily/1day/";
+            string apikey = "UoJSCG3lbTnHIA9VEMQbeILRapsOWdQx";
+            var url = $"http://dataservice.accuweather.com/forecasts/v1/daily/1day/127964?apiKey="+apikey+"&metric=true";
 
             using (WebClient client = new WebClient())
             {
+                //TODO: develop catch to check what status code is sent back
                 string json = client.DownloadString(url);
-                WeatherRootDto weatherInfo = (new JavaScriptSerializer()).Deserialize<WeatherRootDto>(json);
+                WeatherRootDto weatherInfo = new JavaScriptSerializer().Deserialize<WeatherRootDto>(json);
 
                 weatherInfo.Headline.EffectiveDate = dto.EffectiveDate;
                 weatherInfo.Headline.EffectiveEpochDate = dto.EffectiveEpochDate;
@@ -33,12 +34,13 @@ namespace TARpe21ShopVaitmaa.ApplicationServices.Services
                 weatherInfo.Headline.MobileLink = dto.MobileLink;
                 weatherInfo.Headline.Link = dto.Link;
 
-                weatherInfo.DailyForecasts[0].Date = dto.DailyForecastsDay;
-                weatherInfo.DailyForecasts[0].EpochDate = dto.DailyForecastsEpochDay;
+                //weatherInfo.DailyForecasts[0].Date = dto.DailyForecastsDay;
+                //weatherInfo.DailyForecasts[0].EpochDate = dto.DailyForecastsEpochDate;
 
                 weatherInfo.DailyForecasts[0].Temperature.Minimum.Value = dto.TempMinValue;
                 weatherInfo.DailyForecasts[0].Temperature.Minimum.Unit = dto.TempMinUnit;
                 weatherInfo.DailyForecasts[0].Temperature.Minimum.UnitType = dto.TempMinUnitType;
+
                 weatherInfo.DailyForecasts[0].Temperature.Maximum.Value = dto.TempMaxValue;
                 weatherInfo.DailyForecasts[0].Temperature.Maximum.Unit = dto.TempMaxUnit;
                 weatherInfo.DailyForecasts[0].Temperature.Maximum.UnitType = dto.TempMaxUnitType;
@@ -48,16 +50,14 @@ namespace TARpe21ShopVaitmaa.ApplicationServices.Services
                 weatherInfo.DailyForecasts[0].Day.HasPrecipitation = dto.DayHasPrecipitation;
                 weatherInfo.DailyForecasts[0].Day.PrecipitationType = dto.DayPrecipitationType;
                 weatherInfo.DailyForecasts[0].Day.PrecipitationIntensity = dto.DayPrecipitationIntensity;
+
                 weatherInfo.DailyForecasts[0].Night.Icon = dto.NightIcon;
                 weatherInfo.DailyForecasts[0].Night.IconPhrase = dto.NightIconPhrase;
                 weatherInfo.DailyForecasts[0].Night.HasPrecipitation = dto.NightHasPrecipitation;
                 weatherInfo.DailyForecasts[0].Night.PrecipitationType = dto.NightPrecipitationType;
                 weatherInfo.DailyForecasts[0].Night.PrecipitationIntensity = dto.NightPrecipitationIntensity;
             }
-
             return dto;
-            
         }
     }
-
 }

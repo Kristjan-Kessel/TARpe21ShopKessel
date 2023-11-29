@@ -1,21 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
+    <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.22">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.22">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\TARpe21ShopVaitmaa.Data\TARpe21ShopVaitmaa.Data.csproj" />
-    <ProjectReference Include="..\TARpe21ShopVaitmaa.ApplicationServices\TARpe21ShopVaitmaa.ApplicationServices.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\TARpe21ShopVaitmaa.Data\TARpe21ShopVaitmaa.Data.csproj" />
+        <ProjectReference Include="..\TARpe21ShopVaitmaa.ApplicationServices\TARpe21ShopVaitmaa.ApplicationServices.csproj" />
+    </ItemGroup>
 
 </Project>
