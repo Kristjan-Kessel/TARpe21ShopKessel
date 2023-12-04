@@ -15,14 +15,12 @@ namespace TARpe21ShopVaitmaa.ApplicationServices.Services
     {
         public async Task<WeatherResultDto> WeatherDetail(WeatherResultDto dto)
         {
-            string apikey = "UoJSCG3lbTnHIA9VEMQbeILRapsOWdQx";
-            var url = $"http://dataservice.accuweather.com/forecasts/v1/daily/1day/127964?apiKey="+apikey+"&metric=true";
+            var url = $"http://dataservice.accuweather.com/forecasts/v1/daily/1day/127964?apiKey=HtXsGFLFAcnYRG10m695VGkgKCAbEbZd5metric=true";
 
             using (WebClient client = new WebClient())
             {
-                //TODO: develop catch to check what status code is sent back
                 string json = client.DownloadString(url);
-                WeatherRootDto weatherInfo = new JavaScriptSerializer().Deserialize<WeatherRootDto>(json);
+                WeatherRootDto weatherInfo = (new JavaScriptSerializer()).Deserialize<WeatherRootDto>(json);
 
                 weatherInfo.Headline.EffectiveDate = dto.EffectiveDate;
                 weatherInfo.Headline.EffectiveEpochDate = dto.EffectiveEpochDate;
@@ -59,5 +57,6 @@ namespace TARpe21ShopVaitmaa.ApplicationServices.Services
             }
             return dto;
         }
+
     }
 }
