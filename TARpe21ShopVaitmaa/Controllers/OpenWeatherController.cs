@@ -27,21 +27,8 @@ namespace TARpe21ShopVaitmaa.Controllers
 
             if (!string.IsNullOrEmpty(city))
             {
-                TempData["City"] = city;
-                return RedirectToAction("City");
-            }
-
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult City()
-        {
-            OpenWeatherResultDto dto = new();
-
-            if (TempData.TryGetValue("City", out object city))
-            {
-                dto.City = city.ToString();
+                OpenWeatherResultDto dto = new();
+                dto.City = city;
                 _openWeatherServices.OpenWeatherDetail(dto);
 
                 OpenWeatherViewModel vm = new()
@@ -58,11 +45,10 @@ namespace TARpe21ShopVaitmaa.Controllers
                     Speed = dto.Speed
                 };
 
-                return View(vm);
+                return View("City", vm);
             }
 
-            // Handle the case where TempData["City"] is not available.
-            return RedirectToAction("ShowWeather");
+            return View();
         }
     }
 }
