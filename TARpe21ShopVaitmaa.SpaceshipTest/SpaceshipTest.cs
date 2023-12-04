@@ -84,7 +84,6 @@ namespace TARpe21ShopVaitmaa.SpaceshipTest
         {
             SpaceshipDto dto = MockSpaceshipData();
             var Spaceship = await Svc<ISpaceshipsServices>().Create(dto);
-
             var result = await Svc<ISpaceshipsServices>().Delete((Guid)Spaceship.Id);
 
             Assert.Equal(result, Spaceship);
@@ -96,7 +95,7 @@ namespace TARpe21ShopVaitmaa.SpaceshipTest
             SpaceshipDto update = MockSpaceshipData();
             var result = await Svc<ISpaceshipsServices>().Update(update);
 
-            Assert.True(result.Id != update.Id);
+            Assert.NotEqual(result.Id, update.Id);
         }
 
         [Fact]

@@ -10,5 +10,6 @@ namespace TARpe21ShopVaitmaa.Core.ServiceInterface
     public interface IWeatherForecastsServices
     {
         public Task<WeatherResultDto> WeatherDetail(WeatherResultDto dto);
+        public Task<OpenWeatherResultDto> OpenWeatherDetail(OpenWeatherResultDto dto);
     }
 }

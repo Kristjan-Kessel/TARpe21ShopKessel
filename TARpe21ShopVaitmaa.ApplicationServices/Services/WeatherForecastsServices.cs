@@ -58,5 +58,31 @@ namespace TARpe21ShopVaitmaa.ApplicationServices.Services
             return dto;
         }
 
+        public async Task<OpenWeatherResultDto> OpenWeatherDetail(OpenWeatherResultDto dto)
+        {
+            string apikey = "e294f7c54fe454ddfe2131bbe603db4b";
+            string city = dto.City;
+            var url = $"https://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&APPID={apikey}";
+
+            using (WebClient client = new WebClient())
+            {
+                string json = client.DownloadString(url);
+                OpenWeatherRootDto weatherInfo = (new JavaScriptSerializer()).Deserialize<OpenWeatherRootDto>(json);
+
+                dto.City = weatherInfo.Name;
+                dto.Timezone = weatherInfo.Timezone;
+                dto.Lon = weatherInfo.Coord.Lon;
+                dto.Lat = weatherInfo.Coord.Lat;
+                dto.Temperature = weatherInfo.Main.Temp;
+                dto.Feelslike = weatherInfo.Main.FeelsLike;
+                dto.Humidity = weatherInfo.Main.Humidity;
+                dto.Pressure = weatherInfo.Main.Pressure;
+                dto.Speed = weatherInfo.Wind.Speed;
+                dto.Description = weatherInfo.Weather[0].Description;
+                dto.Main = weatherInfo.Weather[0].Main;
+            }
+            return dto;
+        }
+
     }
 }
