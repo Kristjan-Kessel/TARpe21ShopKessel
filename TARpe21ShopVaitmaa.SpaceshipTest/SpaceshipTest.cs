@@ -83,10 +83,10 @@ namespace TARpe21ShopVaitmaa.SpaceshipTest
         public async Task Should_DeleteByIdSpaceship_WhenDeleteSpaceship()
         {
             SpaceshipDto dto = MockSpaceshipData();
-            var Spaceship = await Svc<ISpaceshipsServices>().Create(dto);
-            var result = await Svc<ISpaceshipsServices>().Delete((Guid)Spaceship.Id);
+            var spaceship = await Svc<ISpaceshipsServices>().Create(dto);
+            var result = await Svc<ISpaceshipsServices>().Delete((Guid)spaceship.Id);
 
-            Assert.Equal(result, Spaceship);
+            Assert.Equal(result, spaceship);
         }
 
         [Fact]
@@ -102,11 +102,12 @@ namespace TARpe21ShopVaitmaa.SpaceshipTest
         public async Task ShouldNot_DeleteByIdSpaceship_WhenDidNotDeleteSpaceship()
         {
             SpaceshipDto dto = MockSpaceshipData();
-            var Spaceship = await Svc<ISpaceshipsServices>().Create(dto);
+            var spaceship = await Svc<ISpaceshipsServices>().Create(dto);
+            var spaceship2 = await Svc<ISpaceshipsServices>().Create(dto);
 
-            var result = await Svc<ISpaceshipsServices>().Delete((Guid)Spaceship.Id);
+            var result = await Svc<ISpaceshipsServices>().Delete((Guid)spaceship2.Id);
 
-            Assert.NotEqual(result, Spaceship);
+            Assert.NotEqual(result, spaceship);
         }
 
         private SpaceshipDto MockSpaceshipData()
